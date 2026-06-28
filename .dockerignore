@@ -1,0 +1,10 @@
+.venv
+venv
+__pycache__
+*.pyc
+.git
+.idea
+.vscode
+backend/storage
+backend/processed-filings
+sec-edgar-filings
