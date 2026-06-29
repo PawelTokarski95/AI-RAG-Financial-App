@@ -8,9 +8,7 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 def LLM(query, context, history=None):
-    """
-    Generuje ostateczną odpowiedź, bezwzględnie dopasowując język do zapytania użytkownika.
-    """
+
     MAX_CONTEXT_CHARS = 50000
     context = context[:MAX_CONTEXT_CHARS]
 
@@ -41,7 +39,6 @@ def LLM(query, context, history=None):
 
         messages.extend(history)
 
-        # Zmieniamy etykiety na angielskie (USER QUERY / CONTEXT), aby nie mylić modelu językowego
         messages.append(
             {
                 "role": "user",
@@ -57,7 +54,7 @@ def LLM(query, context, history=None):
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            temperature=0.1,  # Jeszcze niższa temperatura dla lepszego trzymania się reguł
+            temperature=0.1,
             messages=messages
         )
 
@@ -68,10 +65,7 @@ def LLM(query, context, history=None):
 
 
 def rewrite_query(query, history):
-    """
-    Tłumaczy zapytanie z dowolnego języka na angielski i zamienia je
-    w zestaw profesjonalnych pojęć finansowych dla wyszukiwarki FAISS.
-    """
+
     try:
         messages = [
             {
@@ -110,7 +104,7 @@ def rewrite_query(query, history):
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            temperature=0.1,  # Zero oznacza maksymalną precyzję
+            temperature=0.1,
             messages=messages
         )
 
