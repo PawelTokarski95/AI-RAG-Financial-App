@@ -33,13 +33,11 @@ with st.expander("Supported companies"):
 - KO – Coca-Cola
 - WMT – Walmart
 """)
-# Adres URL backendu pobierany ze zmiennej środowiskowej (przydatne w Dockerze)
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Wyświetlanie historii
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.write(message["content"])
@@ -49,15 +47,13 @@ query = st.chat_input(
 )
 
 if query:
-    # Wyświetlenie pytania użytkownika
     st.session_state.messages.append({"role": "user", "content": query})
     with st.chat_message("user"):
         st.write(query)
 
-    # Przygotowanie danych do wysłania (pytanie + dotychczasowa historia)
     payload = {
         "query": query,
-        "history": st.session_state.messages[:-1] # bez najświeższego pytania, backend sam je doda do promptu
+        "history": st.session_state.messages[:-1]
     }
 
     with st.spinner("Analyzing financial reports..."):
