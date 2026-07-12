@@ -65,7 +65,6 @@ if query:
         except Exception as e:
             answer = f"Could not connect to backend: {str(e)}"
 
-    # Wyświetlenie odpowiedzi
     st.session_state.messages.append({"role": "assistant", "content": answer})
     with st.chat_message("assistant"):
         st.write(answer)
