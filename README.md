@@ -1,1 +1,1 @@
-Here I create a RAG System resolving financial operations. IN PROGRESS.
+Here I create a RAG System resolving financial operations. Deployment in progress.
